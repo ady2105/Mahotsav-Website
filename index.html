@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mahotsav</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <div class="header">
+      <div class="logo">Mahotsav</div>
+      <nav aria-label="Main navigation">
+        <button class="mobile-toggle" aria-expanded="false" aria-controls="primary-nav">☰</button>
+        <ul id="primary-nav" class="nav-list" role="menubar">
+          <li role="none"><a role="menuitem" href="#home" class="nav-link">Home</a></li>
+
+          <li class="dropdown" role="none">
+            <a href="#events" class="dropdown-toggle">Events ▾</a>
+            <div class="dropdown-menu">
+              <a href="#music">Music</a>
+              <a href="#dance">Dance</a>
+              <a href="#workshops">Workshops</a>
+              <a href="#cultural">Cultural</a>
+              <a href="#sports">Sports</a>
+            </div>
+          </li>
+
+          <li role="none"><a role="menuitem" href="#gallery" class="nav-link">Gallery</a></li>
+          <li role="none"><a role="menuitem" href="#contact" class="nav-link">Contact Us</a></li>
+          <li role="none"><a role="menuitem" href="#sponsors" class="nav-link">Sponsors</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main style="padding:24px">
+    <h1>Welcome to Mahotsav</h1>
+    <p>Use the navigation above to explore events, gallery and more.</p>
+  </main>
+  <script src="script.js"></script>
+</body>
+</html>
