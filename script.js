@@ -56,4 +56,36 @@ document.addEventListener('DOMContentLoaded', function() {
             console.log('Video autoplay failed:', error);
         });
     }
+
+    // Interactive letter lifting effect
+    const h1Element = document.querySelector('h1');
+    const titleLetters = document.querySelectorAll('.title-letter');
+
+    if (h1Element && titleLetters.length > 0) {
+        h1Element.addEventListener('mousemove', function(e) {
+            const rect = h1Element.getBoundingClientRect();
+            const mouseX = e.clientX - rect.left;
+
+            titleLetters.forEach(function(letter) {
+                const letterRect = letter.getBoundingClientRect();
+                const letterLeft = letterRect.left - rect.left;
+                const letterRight = letterRect.right - rect.left;
+                const letterWidth = letterRight - letterLeft;
+
+                // Check if cursor is over this letter
+                if (mouseX >= letterLeft && mouseX <= letterRight) {
+                    letter.classList.add('lifted');
+                } else {
+                    letter.classList.remove('lifted');
+                }
+            });
+        });
+
+        // Remove lifted class when leaving the h1 element
+        h1Element.addEventListener('mouseleave', function() {
+            titleLetters.forEach(function(letter) {
+                letter.classList.remove('lifted');
+            });
+        });
+    }
 });
