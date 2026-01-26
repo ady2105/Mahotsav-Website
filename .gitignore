@@ -22,7 +22,7 @@ wheels/
 *.egg-info/
 .installed.cfg
 *.egg
-
+*.db
 # --- HTML/Web Specific ---
 # If using build tools for HTML (e.g., Sass, Minification)
 .sass-cache/
