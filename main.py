@@ -1,11 +1,12 @@
-from fastapi import FastAPI, HTTPException, Depends
+from fastapi import FastAPI, HTTPException, Depends, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
-from fastapi.responses import FileResponse
+from fastapi.responses import FileResponse, HTMLResponse, JSONResponse
+from fastapi.templating import Jinja2Templates
 from sqlalchemy import create_engine, Column, Integer, String, DateTime, ForeignKey
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker, Session, relationship
-from pydantic import BaseModel, EmailStr
+from models import *
 from datetime import datetime
 from typing import List, Optional
 import os
@@ -42,40 +43,6 @@ class Registration(Base):
 # Create tables
 Base.metadata.create_all(bind=engine)
 
-# Pydantic Models
-class EventCreate(BaseModel):
-    name: str
-    description: str
-
-class EventResponse(BaseModel):
-    id: int
-    name: str
-    description: str
-    created_at: datetime
-    
-    class Config:
-        from_attributes = True
-
-class RegistrationCreate(BaseModel):
-    event_id: int
-    full_name: str
-    email: EmailStr
-    phone: str
-    organization: Optional[str] = None
-
-class RegistrationResponse(BaseModel):
-    id: int
-    event_id: int
-    full_name: str
-    email: str
-    phone: str
-    organization: Optional[str]
-    registration_date: datetime
-    event_name: str
-    
-    class Config:
-        from_attributes = True
-
 # FastAPI app
 app = FastAPI(title="Event Registration API")
 
@@ -95,6 +62,10 @@ def get_db():
         yield db
     finally:
         db.close()
+
+# ============================================
+# API ENDPOINTS (with /api prefix)
+# ============================================
 
 # Event endpoints
 @app.post("/api/events/", response_model=EventResponse)
@@ -233,27 +204,63 @@ def get_dashboard_stats(db: Session = Depends(get_db)):
         "event_stats": event_stats
     }
 
-# Mount static files - adjust the directory path as needed
-# This assumes your HTML/CSS/JS files are in a folder named 'static'
-static_dir = "static"
-if os.path.exists(static_dir):
-    app.mount("/static", StaticFiles(directory=static_dir), name="static")
+# ============================================
+# SERVE STATIC FILES
+# ============================================
+
+# Mount static directory for all assets
+app.mount("/assets", StaticFiles(directory="static/assets"), name="assets")
+app.mount("/pages", StaticFiles(directory="static/pages"), name="pages")
+app.mount("/components", StaticFiles(directory="static/components"), name="components")
+
+
+# Serve CSS and JS files from static root
+@app.get("/style.css")
+def serve_css():
+    return FileResponse("static/style.css")
+
+@app.get("/script.js")
+def serve_js():
+    return FileResponse("static/script.js")
 
 # Serve index.html at root
 @app.get("/")
-def read_root():
-    index_path = os.path.join(static_dir, "index.html")
-    if os.path.exists(index_path):
-        return FileResponse(index_path)
-    return {"message": "Event Registration API", "docs": "/docs"}
+def serve_index():
+    return FileResponse("static/index.html")
 
-# Optional: Serve other HTML pages directly
-@app.get("/{page_name}.html")
-def read_page(page_name: str):
-    page_path = os.path.join(static_dir, f"{page_name}.html")
-    if os.path.exists(page_path):
-        return FileResponse(page_path)
-    raise HTTPException(status_code=404, detail="Page not found")
+# Optional: Admin dashboard route using Jinja2 (if you want to create one)
+# Uncomment this if you create a templates folder with dashboard.html
+"""
+templates = Jinja2Templates(directory="templates")
+
+@app.get("/admin/dashboard", response_class=HTMLResponse)
+def admin_dashboard(request: Request, db: Session = Depends(get_db)):
+    registrations = db.query(Registration).join(Event).all()
+    events = db.query(Event).all()
+    
+    formatted_registrations = [
+        {
+            "id": reg.id,
+            "full_name": reg.full_name,
+            "email": reg.email,
+            "phone": reg.phone,
+            "organization": reg.organization,
+            "event_name": reg.event.name,
+            "registration_date": reg.registration_date
+        }
+        for reg in registrations
+    ]
+    
+    return templates.TemplateResponse(
+        "dashboard.html",
+        {
+            "request": request,
+            "registrations": formatted_registrations,
+            "events": events,
+            "total_registrations": len(registrations)
+        }
+    )
+"""
 
 if __name__ == "__main__":
     import uvicorn
