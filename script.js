@@ -3,7 +3,6 @@ document.addEventListener('DOMContentLoaded', function() {
     const navToggle = document.querySelector('.nav-toggle');
     const navMenu = document.querySelector('.nav-menu');
     const dropdowns = document.querySelectorAll('.dropdown');
-    const video = document.getElementById('bg-video');
 
     // Mobile menu toggle
     if (navToggle && navMenu) {
@@ -49,13 +48,6 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         }
     });
-
-    // Initialize video playback
-    if (video) {
-        video.play().catch(function(error) {
-            console.log('Video autoplay failed:', error);
-        });
-    }
 
     // Interactive letter lifting effect
     const h1Element = document.querySelector('h1');

@@ -10,81 +10,63 @@
 </head>
 <body>
     
-    <!-- Registration Page -->
-    <div class="registration-page">
-        <div class="overlay"></div>
-
-        <!-- Navigation -->
-        <nav class="navbar">
-            <a href="../index.html" class="logo">Mahotsav</a>
-            <div class="nav-toggle">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
-            <ul class="nav-menu">
-                <li><a href="about.html" class="nav-link">About Us</a></li>
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle">Events ▾</a>
-                    <div class="dropdown-menu">
-                        <div class="menu-column">
-                            <h3>Main Events</h3>
-                            <a href="events/wall-painting.html">Wall Painting</a>
-                            <a href="events/road-painting.html">Road Painting</a>
-                            <a href="events/masquerade.html">Masquerade</a>
-                            <a href="events/paper-in-vogue.html">Paper In Vogue</a>
-                            <a href="events/spot-sketching.html">Spot Sketching</a>
-                            <a href="events/kirigami.html">Kirigami</a>
-                            <a href="events/face-painting.html">Face Painting</a>
-                            <a href="events/scandal.html">Scandal</a>
-                            <a href="events/comicstan.html">Comicstan</a>
-                            <a href="events/calligraphy.html">Calligraphy</a>
-                            <a href="events/brush-attack.html">Brush Attack</a>
-                            <a href="events/click-o-mania.html">Click-O-Mania</a>
-                        </div>
-                    </div>
-                </li>
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle">Gallery ▾</a>
-                    <div class="dropdown-menu">
-                        <a href="#">Mahotsav 2026</a>
-                        <a href="#">Mahotsav 2025</a>
-                        <a href="#">Event Memories</a>
-                    </div>
-                </li>
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle">Contact ▾</a>
-                    <div class="dropdown-menu">
-                        <a href="#"><i class="fab fa-instagram"></i> Instagram</a>
-                        <a href="#"><i class="fab fa-whatsapp"></i> WhatsApp</a>
-                        <a href="#"><i class="fab fa-linkedin"></i> LinkedIn</a>
-                    </div>
-                </li>
-                <li><a href="#" class="nav-link">Sponsors</a></li>
-                <li><a href="register.html" class="register-btn">Register</a></li>
-            </ul>
-        </nav>
-
-        <!-- Logo Section -->
-        <div class="logo-left">
-            <a href="https://bietjhs.ac.in/" target="_blank"><img src="../assets/images/logo-left.png" alt="BIET Logo"></a>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <a href="../index.html" class="logo">Mahotsav</a>
+        <div class="nav-toggle">
+            <span></span>
+            <span></span>
+            <span></span>
         </div>
-
-        <div class="logo-right">
-            <a href="../index.html"><img src="../assets/images/logo-right.png" alt="Mahotsav Logo"></a>
-        </div>
-
-        <!-- Registration Content -->
-        <div class="content">
-            <div class="registration-content">
-                <h1>Register for Events</h1>
-                <p class="subtitle">Choose your favorite events and register now!</p>
-            </div>
-        </div>
-    </div>
+        <ul class="nav-menu">
+            <li><a href="about.html" class="nav-link">About Us</a></li>
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle">Events ▾</a>
+                <div class="dropdown-menu">
+                    <div class="menu-column">
+                        <h3>Main Events</h3>
+                        <a href="events/wall-painting.html">Wall Painting</a>
+                        <a href="events/road-painting.html">Road Painting</a>
+                        <a href="events/masquerade.html">Masquerade</a>
+                        <a href="events/paper-in-vogue.html">Paper In Vogue</a>
+                        <a href="events/spot-sketching.html">Spot Sketching</a>
+                        <a href="events/kirigami.html">Kirigami</a>
+                        <a href="events/face-painting.html">Face Painting</a>
+                        <a href="events/scandal.html">Scandal</a>
+                        <a href="events/comicstan.html">Comicstan</a>
+                        <a href="events/calligraphy.html">Calligraphy</a>
+                        <a href="events/brush-attack.html">Brush Attack</a>
+                        <a href="events/click-o-mania.html">Click-O-Mania</a>
+                    </div>
+                </div>
+            </li>
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle">Gallery ▾</a>
+                <div class="dropdown-menu">
+                    <a href="#">Mahotsav 2026</a>
+                    <a href="#">Mahotsav 2025</a>
+                    <a href="#">Event Memories</a>
+                </div>
+            </li>
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle">Contact ▾</a>
+                <div class="dropdown-menu">
+                    <a href="#"><i class="fab fa-instagram"></i> Instagram</a>
+                    <a href="#"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+                    <a href="#"><i class="fab fa-linkedin"></i> LinkedIn</a>
+                </div>
+            </li>
+            <li><a href="#" class="nav-link">Sponsors</a></li>
+            <li><a href="register.html" class="register-btn">Register</a></li>
+        </ul>
+    </nav>
 
     <!-- Events Registration Cards Section -->
     <section class="events-registration-section">
+        <div class="registration-header">
+            <h1>Register for Events</h1>
+            <p class="subtitle">Choose your favorite events and register now!</p>
+        </div>
         <div class="events-registration-container">
             <!-- Brush Attack -->
             <div class="event-register-card" id="brush-attack">
@@ -96,7 +78,7 @@
                     <p>
                         Unleash your creativity in Brush Attack, where vibrant colors and bold strokes come together in a dynamic painting competition. Whether you're a seasoned artist or just love to paint, this event is your canvas to express yourself.
                     </p>
-                    <a href="#" class="register-link">Register Now</a>
+                    <a href="events/brush-attack.html" class="register-link">Register Now</a>
                 </div>
             </div>
 
@@ -110,7 +92,7 @@
                     <p>
                         Dive into the world of comics with Comicstan, a thrilling event that celebrates the art of storytelling through illustrations. Whether you're a comic book enthusiast or an aspiring artist, showcase your talent.
                     </p>
-                    <a href="#" class="register-link">Register Now</a>
+                    <a href="events/comicstan.html" class="register-link">Register Now</a>
                 </div>
             </div>
 
@@ -124,7 +106,7 @@
                     <p>
                         Capture the world through your lens in Click-O-Mania, a photography event that invites you to showcase your unique perspective and freeze moments in time.
                     </p>
-                    <a href="#" class="register-link">Register Now</a>
+                    <a href="events/click-o-mania.html" class="register-link">Register Now</a>
                 </div>
             </div>
 
@@ -138,7 +120,7 @@
                     <p>
                         Immerse yourself in the art of beautiful writing with our Calligraphy event. Whether you're a seasoned calligrapher or a beginner, showcase your skills and creativity.
                     </p>
-                    <a href="#" class="register-link">Register Now</a>
+                    <a href="events/calligraphy.html" class="register-link">Register Now</a>
                 </div>
             </div>
 
@@ -152,7 +134,7 @@
                     <p>
                         Embark on a thrilling artistic journey with Scandal, an event that challenges you to create captivating and provocative artworks and push creative boundaries.
                     </p>
-                    <a href="#" class="register-link">Register Now</a>
+                    <a href="events/scandal.html" class="register-link">Register Now</a>
                 </div>
             </div>
 
@@ -166,7 +148,7 @@
                     <p>
                         Step into a world of color and creativity with our Face Painting event. Whether you're a skilled artist or a beginner, bring faces to life with vibrant designs.
                     </p>
-                    <a href="#" class="register-link">Register Now</a>
+                    <a href="events/face-painting.html" class="register-link">Register Now</a>
                 </div>
             </div>
 
@@ -180,7 +162,7 @@
                     <p>
                         Discover the art of paper cutting with Kirigami, an event that invites you to create intricate designs and stunning paper sculptures through delicate craftsmanship.
                     </p>
-                    <a href="#" class="register-link">Register Now</a>
+                    <a href="events/kirigami.html" class="register-link">Register Now</a>
                 </div>
             </div>
 
@@ -194,7 +176,7 @@
                     <p>
                         Unleash your creativity on the spot with our Spot Sketching event. Capture the essence of the moment through quick sketches and artistic expression.
                     </p>
-                    <a href="#" class="register-link">Register Now</a>
+                    <a href="events/spot-sketching.html" class="register-link">Register Now</a>
                 </div>
             </div>
 
@@ -208,7 +190,7 @@
                     <p>
                         Explore the world of fashion and design with Paper In Vogue, an event that challenges you to create stunning outfits using only paper and push the boundaries of fashion.
                     </p>
-                    <a href="#" class="register-link">Register Now</a>
+                    <a href="events/paper-in-vogue.html" class="register-link">Register Now</a>
                 </div>
             </div>
 
@@ -222,7 +204,7 @@
                     <p>
                         Step into a world of mystery and elegance with our Masquerade event. Create beautiful masquerade masks and showcase your talent in crafting artistic designs.
                     </p>
-                    <a href="#" class="register-link">Register Now</a>
+                    <a href="events/masquerade.html" class="register-link">Register Now</a>
                 </div>
             </div>
 
@@ -236,7 +218,7 @@
                     <p>
                         Transform the streets into a vibrant canvas with our Road Painting event. Showcase your talent and creativity in large-scale street art and transform blank walls.
                     </p>
-                    <a href="#" class="register-link">Register Now</a>
+                    <a href="events/road-painting.html" class="register-link">Register Now</a>
                 </div>
             </div>
 
@@ -250,7 +232,7 @@
                     <p>
                         Unleash your creativity on a grand scale with our Wall Painting event. Transform blank walls into vibrant works of art and showcase your talent and passion.
                     </p>
-                    <a href="#" class="register-link">Register Now</a>
+                    <a href="events/wall-painting.html" class="register-link">Register Now</a>
                 </div>
             </div>
         </div>
