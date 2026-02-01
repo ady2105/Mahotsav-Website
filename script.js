@@ -80,4 +80,131 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         });
     }
+
+    // Gallery Carousel Auto-Scroll & Infinite Scroll
+    const setupCarousel = (selector) => {
+        const container = document.querySelector(selector);
+        if (!container || container.children.length === 0) return;
+
+        const originalItemsCount = container.children.length;
+        const items = Array.from(container.children);
+        
+        // Clone items for infinite scroll
+        items.forEach(item => {
+            const clone = item.cloneNode(true);
+            clone.setAttribute('aria-hidden', 'true');
+            container.appendChild(clone);
+        });
+
+        let itemWidth = 0;
+        let scrollThreshold = 0;
+
+        const updateCenterFocus = () => {
+            const centerPoint = container.getBoundingClientRect().left + container.clientWidth / 2;
+            Array.from(container.children).forEach(item => {
+                const itemRect = item.getBoundingClientRect();
+                const itemCenter = itemRect.left + itemRect.width / 2;
+                if (Math.abs(centerPoint - itemCenter) < itemRect.width / 2) {
+                    item.classList.add('center-focus');
+                } else {
+                    item.classList.remove('center-focus');
+                }
+            });
+        };
+
+        const calculateMetrics = () => {
+            const firstItem = container.children[0];
+            if (!firstItem) return;
+            const gap = parseFloat(window.getComputedStyle(container).gap) || 0;
+            itemWidth = firstItem.getBoundingClientRect().width + gap;
+            scrollThreshold = originalItemsCount * itemWidth;
+            updateCenterFocus();
+        };
+
+        calculateMetrics();
+        window.addEventListener('resize', calculateMetrics);
+
+        const autoScroll = () => {
+            if (container.matches(':hover')) return;
+
+            if (container.scrollLeft >= scrollThreshold - 1) {
+                container.scrollLeft -= scrollThreshold;
+            }
+
+            container.scrollBy({
+                left: itemWidth,
+                behavior: 'smooth'
+            });
+        };
+
+        setInterval(autoScroll, 3000);
+        
+        // Reset on manual scroll for infinite feel
+        let isScrolling = false;
+        container.addEventListener('scroll', () => {
+            if (!isScrolling) {
+                window.requestAnimationFrame(() => {
+                    if (scrollThreshold > 0 && container.scrollLeft >= scrollThreshold) {
+                        container.scrollLeft -= scrollThreshold;
+                    } else if (container.scrollLeft <= 0) {
+                        container.scrollLeft += scrollThreshold;
+                    }
+                    updateCenterFocus();
+                    isScrolling = false;
+                });
+                isScrolling = true;
+            }
+        });
+    };
+
+    setupCarousel('.gallery-grid');
+
+    // Marquee Infinite Scroll
+    const setupMarquee = (selector, speed = 1) => {
+        const containers = document.querySelectorAll(selector);
+        
+        containers.forEach(container => {
+            const content = container.querySelector('.marquee-content');
+            if (!content) return;
+            
+            let isHovered = false;
+            container.addEventListener('mouseenter', () => isHovered = true);
+            container.addEventListener('mouseleave', () => isHovered = false);
+            
+            let singleSetWidth = 0;
+            
+            const calculateWidth = () => {
+                const items = Array.from(content.children);
+                if (items.length === 0) return;
+                
+                const gap = parseFloat(window.getComputedStyle(content).gap) || 0;
+                const halfCount = Math.ceil(items.length / 2);
+                singleSetWidth = 0;
+                
+                for(let i = 0; i < halfCount; i++) {
+                    singleSetWidth += items[i].getBoundingClientRect().width + gap;
+                }
+            };
+
+            calculateWidth();
+            window.addEventListener('resize', calculateWidth);
+            window.addEventListener('load', calculateWidth);
+            
+            const animate = () => {
+                if (!isHovered && singleSetWidth > 0) {
+                    container.scrollLeft += speed;
+                    
+                    if (container.scrollLeft >= singleSetWidth) {
+                        container.scrollLeft -= singleSetWidth;
+                    } else if (container.scrollLeft <= 0) {
+                        container.scrollLeft += singleSetWidth;
+                    }
+                }
+                requestAnimationFrame(animate);
+            };
+            requestAnimationFrame(animate);
+        });
+    };
+
+    setupMarquee('.marquee-container', 1);
 });
