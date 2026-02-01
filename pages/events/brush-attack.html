@@ -80,11 +80,23 @@
                     </div>
 
                     <form id="registrationForm">
-                        <input type="text" placeholder="Name" name="participant">
-                        <input type="text" placeholder="Branch" name="branch">
-                        <input type="number" placeholder="Year" name="year">
-                        <input type="number" placeholder="Mobile no." name="phn">
-                        <input type="email" placeholder="E-mail" name="email">
+                        <input type="text" placeholder="Team Name" name="tName">
+                        <input type="text" placeholder="Leader's Name" name="lName">
+                        <input type="text" placeholder="Leader's Branch" name="lBranch">
+                        <input type="number" placeholder="Leader's Mobile Number" name="lMobile">
+                        <input type="email" placeholder="Leader's E-mail" name="lEmail">
+                        <h3>Member's Details</h3>
+
+                        <input type="text" placeholder="Name" name="m1Name">
+                        <input type="text" placeholder="Branch" name="m1Branch">
+                        <input type="number" placeholder="Mobile Number" name="m1Mobile">
+                        <input type="email" placeholder="E-mail" name="m1Email">
+
+                        <input type="text" placeholder="Name" name="m2Name">
+                        <input type="text" placeholder="Branch" name="m2Branch">
+                        <input type="number" placeholder="Mobile Number" name="m2Mobile">
+                        <input type="email" placeholder="E-mail" name="m2Email">
+
                         <button type="submit">Register Now</button>
                     </form>
                 </div>
@@ -140,6 +152,7 @@
         const frm = document.querySelector("#registrationForm");
         frm.addEventListener('submit', async(e)=>{
             e.preventDefault();
+
             console.log("Registration form workin fine");
             try{
             const res = await fetch("http://localhost:3000", {
@@ -148,12 +161,26 @@
                 "Content-Type" : "application/json"
                 },
                 body: JSON.stringify({
-                    name: e.target.participant.value,
-                    eventName: "Brush Attack",
-                    branch: e.target.branch.value,
-                    year: e.target.year.value,
-                    phn: e.target.phn.value,
-                    email: e.target.email.value
+                    eventName: "BrushAttack",
+                    tName: e.target.tName.value,
+                    lName: e.target.lName.value,
+                    lBranch: e.target.lBranch.value,
+                    lMobile: e.target.lMobile.value,
+                    lEmail: e.target.lEmail.value,
+                    members: [
+                        {
+                    Name: e.target.m1Name.value,
+                    Email: e.target.m1Email.value,
+                    Mobile: e.target.m1Mobile.value,
+                    Branch: e.target.m1Branch.value,
+                },
+                 {
+                    Name: e.target.m2Name.value,
+                    Email: e.target.m2Email.value,
+                    Mobile: e.target.m2Mobile.value,
+                    Branch: e.target.m2Branch.value,
+                }
+                    ]
                 })
             });
             const data = await res.json();

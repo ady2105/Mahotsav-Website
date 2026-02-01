@@ -9,14 +9,25 @@ mongoose.connect(`mongodb+srv://zeesh_uchiha:zeeshan@cluster0.s29ojh6.mongodb.ne
 
 const Participants = require("./models/participants");
 
+const models = require("./models/participants")
+
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({extended:false}));
 
 
-app.post('/', (req, res)=>{
+app.post('/', async (req, res)=>{
     const body = req.body;
-    console.log(body);
+    //console.log(...body.members)
+    const model = models[body.eventName];
+    await model.create({
+        Team_Name: body.tName,
+        Team_Leader: body.lName,
+        Leader_Email: body.lEmail,
+        Leader_MobileNo: body.lMobile,
+        Leader_Branch: body.lBranch,
+        Members: [...body.members]
+    }).then((res)=> console.log(res))
     return res.json({success: true});
 });
 
