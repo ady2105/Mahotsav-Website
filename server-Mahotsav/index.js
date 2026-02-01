@@ -1,10 +1,11 @@
 const express = require('express');
+require('dotenv').config();
 const { default: mongoose } = require('mongoose');
 const app = express();
 const PORT = process.env.PORT | 3000;
 const cors = require('cors');
 
-mongoose.connect(`mongodb+srv://zeesh_uchiha:zeeshan@cluster0.s29ojh6.mongodb.net/Mahotsav?appName=Cluster0`)
+mongoose.connect(process.env.MONGO_URI)
     .then(()=>console.log("MongoDB Connected"));
 
 const Participants = require("./models/participants");
