@@ -80,14 +80,16 @@
                         <p></p>
                     </div>
                     <a href="../../pages/register.html" class="event-register-btn">Register Now</a>
+
                     <form id="registrationForm">
-                        <input type="text" placeholder="Name" name="participant">
+                        <input type="text" placeholder="Name" name="name">
                         <input type="text" placeholder="Branch" name="branch">
-                        <input type="number" placeholder="Year" name="year">
-                        <input type="number" placeholder="Mobile no." name="phn">
+                        <input type="number" placeholder="Mobile Number" name="mobileNo">
                         <input type="email" placeholder="E-mail" name="email">
-                        <button type="submit">Register Now</button>
+                       
+                        <button type="submit">Submit</button>
                     </form>
+
                 </div>
             </div>
         </div>
@@ -140,20 +142,20 @@
         const frm = document.querySelector("#registrationForm");
         frm.addEventListener('submit', async(e)=>{
             e.preventDefault();
+
             console.log("Registration form workin fine");
-            try{
+            try{ 
             const res = await fetch("http://localhost:3000", {
                 method: "post",
                 headers: {
                 "Content-Type" : "application/json"
                 },
                 body: JSON.stringify({
-                    name: e.target.participant.value,
                     eventName: "Kirigami",
+                    name: e.target.name.value,
                     branch: e.target.branch.value,
-                    year: e.target.year.value,
-                    phn: e.target.phn.value,
-                    email: e.target.email.value
+                    mobileNo: e.target.mobileNo.value,
+                    email: e.target.email.value,
                 })
             });
             const data = await res.json();

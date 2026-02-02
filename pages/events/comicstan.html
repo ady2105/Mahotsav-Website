@@ -79,7 +79,16 @@
                     <div class="event-description">
                         <p></p>
                     </div>
-                    <a href="../../pages/register.html" class="event-register-btn">Register Now</a>
+
+                    <form id="registrationForm">
+                        <input type="text" placeholder="Name" name="name">
+                        <input type="text" placeholder="Branch" name="branch">
+                        <input type="number" placeholder="Mobile Number" name="mobileNo">
+                        <input type="email" placeholder="E-mail" name="email">
+                       
+                        <button type="submit">Submit</button>
+                    </form>
+                    
                 </div>
             </div>
         </div>
@@ -127,6 +136,39 @@
             </div>
         </div>
     </footer>
+
+    <script>
+        const frm = document.querySelector("#registrationForm");
+        frm.addEventListener('submit', async(e)=>{
+            e.preventDefault();
+
+            console.log("Registration form workin fine");
+            try{ 
+            const res = await fetch("http://localhost:3000", {
+                method: "post",
+                headers: {
+                "Content-Type" : "application/json"
+                },
+                body: JSON.stringify({
+                    eventName: "Comicstan",
+                    name: e.target.name.value,
+                    branch: e.target.branch.value,
+                    mobileNo: e.target.mobileNo.value,
+                    email: e.target.email.value,
+                })
+            });
+            const data = await res.json();
+            if(data.success){
+                window.location.href = "../registration-success.html"
+            } else {
+                window.location.href = "../registration-failure.html"
+            }
+        } catch(err){
+            console.log(err);
+            window.location.href = "../registration-failure.html"
+        }
+        });
+    </script>
 
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
     <script src="../../script.js"></script>

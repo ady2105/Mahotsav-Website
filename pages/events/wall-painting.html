@@ -79,7 +79,38 @@
                     <div class="event-description">
                         <p></p>
                     </div>
-                    <a href="../../pages/register.html" class="event-register-btn">Register Now</a>
+
+                    <form id="registrationForm">
+                        <input type="text" placeholder="Team Name" name="tName">
+                        <input type="text" placeholder="Leader's Name" name="lName">
+                        <input type="text" placeholder="Leader's Branch" name="lBranch">
+                        <input type="number" placeholder="Leader's Mobile Number" name="lMobile">
+                        <input type="email" placeholder="Leader's E-mail" name="lEmail">
+                        <h3>Member's Details</h3>
+
+                        <input type="text" placeholder="Name" name="m1Name">
+                        <input type="text" placeholder="Branch" name="m1Branch">
+                        <input type="number" placeholder="Mobile Number" name="m1Mobile">
+                        <input type="email" placeholder="E-mail" name="m1Email">
+
+                        <input type="text" placeholder="Name" name="m2Name">
+                        <input type="text" placeholder="Branch" name="m2Branch">
+                        <input type="number" placeholder="Mobile Number" name="m2Mobile">
+                        <input type="email" placeholder="E-mail" name="m2Email">
+
+                        <input type="text" placeholder="Name" name="m3Name">
+                        <input type="text" placeholder="Branch" name="m3Branch">
+                        <input type="number" placeholder="Mobile Number" name="m3Mobile">
+                        <input type="email" placeholder="E-mail" name="m3Email">
+
+                        <input type="text" placeholder="Name" name="m4Name">
+                        <input type="text" placeholder="Branch" name="m4Branch">
+                        <input type="number" placeholder="Mobile Number" name="m4Mobile">
+                        <input type="email" placeholder="E-mail" name="m4Email">
+
+                        <button type="submit">Submit</button>
+                    </form>
+
                 </div>
             </div>
         </div>
@@ -127,7 +158,67 @@
             </div>
         </div>
     </footer>
+    
+<script>
+        const frm = document.querySelector("#registrationForm");
+        frm.addEventListener('submit', async(e)=>{
+            e.preventDefault();
 
+            console.log("Registration form workin fine");
+            try{
+            const res = await fetch("http://localhost:3000", {
+                method: "post",
+                headers: {
+                "Content-Type" : "application/json"
+                },
+                body: JSON.stringify({
+                    eventName: "WallPainting",
+                    tName: e.target.tName.value,
+                    lName: e.target.lName.value,
+                    lBranch: e.target.lBranch.value,
+                    lMobile: e.target.lMobile.value,
+                    lEmail: e.target.lEmail.value,
+                    members: [
+                        {
+                    Name: e.target.m1Name.value,
+                    Email: e.target.m1Email.value,
+                    Mobile: e.target.m1Mobile.value,
+                    Branch: e.target.m1Branch.value,
+                },
+                {
+                    Name: e.target.m2Name.value,
+                    Email: e.target.m2Email.value,
+                    Mobile: e.target.m2Mobile.value,
+                    Branch: e.target.m2Branch.value,
+                },
+                {
+                    Name: e.target.m3Name.value,
+                    Email: e.target.m3Email.value,
+                    Mobile: e.target.m3Mobile.value,
+                    Branch: e.target.m3Branch.value,
+                },
+                {
+                    Name: e.target.m4Name.value,
+                    Email: e.target.m4Email.value,
+                    Mobile: e.target.m4Mobile.value,
+                    Branch: e.target.m4Branch.value,
+                }
+                    ]
+                })
+            });
+            const data = await res.json();
+            if(data.success){
+                window.location.href = "../registration-success.html"
+            } else {
+                window.location.href = "../registration-failure.html"
+            }
+        } catch(err){
+            console.log(err);
+            window.location.href = "../registration-failure.html"
+        }
+        });
+    </script>
+    
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
     <script src="../../script.js"></script>
 </body>

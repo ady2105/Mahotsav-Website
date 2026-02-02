@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const participantSchema = new mongoose.Schema(
+const teamSchema = new mongoose.Schema(
   {
     Team_Name: {
       type: String,
@@ -15,7 +15,7 @@ const participantSchema = new mongoose.Schema(
       required: true,
       unique: true,
     },
-    Leader_MobileNo: {
+    Leader_Mobile_No: {
       type: Number ,
       required: true,
     },
@@ -26,74 +26,58 @@ const participantSchema = new mongoose.Schema(
     Members: [{
       Name: String,
       Email: String,
-      Mobile_No: Number,
+      Mobile: Number,
       Branch: String
     }]
   },
   { timestamps: true }
 );
 
-const BrushAttack = mongoose.model("brushAttack", participantSchema);
-const Kirigami = mongoose.model("kirigami", participantSchema);
+const individualSchema = new mongoose.Schema({
+    Name: {
+      type: String,
+      required: true,
+    },
+    Email: {
+      type: String,
+      required: true,
+      unique: true,
+    },
+    Mobile_Number: {
+      type: Number ,
+      required: true,
+    },
+    Branch: {
+      type: String,
+      required: true,
+    },
+  },
+  { timestamps: true }
+);
 
+const Kirigami = mongoose.model("Kirigami", individualSchema);
+const Calligraphy = mongoose.model("Calligraphy", individualSchema);
+const Scandal = mongoose.model("Scandal", individualSchema);
+const Comicstan = mongoose.model("Comicstan", individualSchema);
 
+const PaperInVogue = mongoose.model("Paper-In-Vogue", teamSchema);
+const SpotSketching = mongoose.model("Spot-Sketching", teamSchema);
+const FacePainting = mongoose.model("Face-Painting", teamSchema);
+const RoadPainting = mongoose.model("Road-Painting", teamSchema);
+const Masquerade = mongoose.model("Masquerade", teamSchema);
+const Clickomania = mongoose.model("Click-O-Mania", teamSchema);
 
 module.exports = {
-  BrushAttack,
+  teamSchema,
+  individualSchema,
   Kirigami,
+  Calligraphy,
+  Scandal,
+  Comicstan,
+  PaperInVogue,
+  SpotSketching,
+  FacePainting,
+  RoadPainting,
+  Masquerade,
+  Clickomania
 }
-
-/*
-
-const teamSchema = new mongoose.Schema({
-  event_Name: String,
-  team_Name: String,
-  team_leader: String,
-  leader_email: String,
-  leader_mobileNo: Number,
-  leader_branch: String,
-  members: [
-    {
-      name: String,
-      email: String,
-      branch: String
-    }
-  ]
-});
-
-*/
-
-
-
-// const mongoose = require("mongoose");
-
-// const participantSchema = new mongoose.Schema(
-//   {
-//     name: {
-//       type: String,
-//       required: true,
-//     },
-//     event: {
-//       type: String,
-//       required: true,
-//     },
-//     email: {
-//       type: String,
-//       required: true,
-//       unique: true,
-//     },
-//     branch: {
-//       type: String,
-//       required: true,
-//     },
-//     year: {
-//       type: Number ,
-//       required: true,
-//     },
-//   },
-//   { timestamps: true }
-// );
-
-// const Participants = mongoose.model("participants", participantSchema);
-
-// module.exports = Participants;
