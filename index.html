@@ -378,11 +378,8 @@
                 logo.style.opacity = 1 - Math.min(1, Math.max(0, scrollPosition / 500));
             }
 
-            // Keep other elements static (pinned) and fade them out
-            staticContent.forEach(element => {
-                element.style.transform = `translateY(${scrollPosition}px)`;
-                element.style.opacity = 1 - Math.min(1, Math.max(0, scrollPosition / 400));
-            });
+            
+           
         });
     </script>
 </body>

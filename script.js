@@ -127,7 +127,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const autoScroll = () => {
             if (container.matches(':hover')) return;
 
-            if (container.scrollLeft >= scrollThreshold - 1) {
+            if (container.scrollLeft >= scrollThreshold) {
                 container.scrollLeft -= scrollThreshold;
             }
 
@@ -146,8 +146,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 window.requestAnimationFrame(() => {
                     if (scrollThreshold > 0 && container.scrollLeft >= scrollThreshold) {
                         container.scrollLeft -= scrollThreshold;
-                    } else if (container.scrollLeft <= 0) {
-                        container.scrollLeft += scrollThreshold;
                     }
                     updateCenterFocus();
                     isScrolling = false;
@@ -196,8 +194,6 @@ document.addEventListener('DOMContentLoaded', function() {
                     
                     if (container.scrollLeft >= singleSetWidth) {
                         container.scrollLeft -= singleSetWidth;
-                    } else if (container.scrollLeft <= 0) {
-                        container.scrollLeft += singleSetWidth;
                     }
                 }
                 requestAnimationFrame(animate);
